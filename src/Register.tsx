@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Home } from 'lucide-react';
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -44,7 +45,17 @@ const Register: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto px-4 py-12">
-      <h1 className="text-2xl font-bold mb-6 text-center">Register</h1>
+      {/* Header with Home button */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl font-bold">Register</h1>
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg font-medium border border-emerald-200 transition-colors"
+        >
+          <Home className="w-5 h-5" />
+          Beranda
+        </button>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-xl shadow">
         {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded">{error}</div>}
         {success && <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded">{success}</div>}
@@ -91,17 +102,7 @@ const Register: React.FC = () => {
             placeholder="08123456789"
           />
         </div>
-        <div>
-          <label className="block mb-1 font-medium">Daftar Sebagai</label>
-          <select
-            value={role}
-            onChange={e => setRole(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2"
-          >
-            <option value="donatur">Donatur</option>
-            <option value="pengelola">Pengelola Kampanye</option>
-          </select>
-        </div>
+
         <button
           type="submit"
           disabled={loading}

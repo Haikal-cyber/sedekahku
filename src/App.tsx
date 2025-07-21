@@ -266,7 +266,7 @@ function App() {
             </div>
             <div className="relative">
               <img 
-                src="https://images.pexels.com/photos/8819589/pexels-photo-8819589.jpeg" 
+                src="https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg" 
                 alt="Tentang SedekahKita"
                 className="rounded-2xl shadow-xl w-full h-80 object-cover"
               />
