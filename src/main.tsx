@@ -9,6 +9,7 @@ import Register from './Register';
 import DonorDashboard from './DonorDashboard';
 import ManagerDashboard from './ManagerDashboard';
 import PaymentFinish from './paymentFinish';
+import DonationSuccess from './DonationSuccess';
 import { AuthProvider } from './AuthContext';
 import './index.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/dashboard/donor" element={<DonorDashboard />} />
           <Route path="/dashboard/manager" element={<ManagerDashboard />} />
           <Route path="/payment/finish" element={<PaymentFinish />} />
+          <Route path="/donations/success" element={<DonationSuccess />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
