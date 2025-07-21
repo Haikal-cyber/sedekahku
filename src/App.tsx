@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Fuel as Mosque, Users, BookOpen, Shield, Star, ChevronRight, Facebook, Instagram, Twitter, Mail, Phone, MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Heart, Fuel as Mosque, Users, BookOpen, Shield, Star, ChevronRight, Facebook, Instagram, Twitter, Mail, Phone, MapPin, UserCircle, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 interface Campaign {
   id: string;
@@ -24,6 +25,8 @@ interface Campaign {
 function App() {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated, user, logout } = useAuth ? useAuth() : { isAuthenticated: false, user: null, logout: () => {} };
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCampaigns();
@@ -100,12 +103,31 @@ function App() {
             </nav>
 
             <div className="flex items-center space-x-4">
-              <button className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
-                Masuk
-              </button>
-              <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg">
-                Daftar
-              </button>
+              {isAuthenticated ? (
+                <>
+                  <Link to={user && (user.role === 'admin' || user.role === 'pengelola') ? '/dashboard/manager' : '/dashboard/donor'} className="flex items-center space-x-2 group">
+                    <UserCircle className="w-8 h-8 text-emerald-600 group-hover:text-emerald-700 transition-colors duration-200" />
+                    <span className="hidden md:inline font-medium text-gray-700 group-hover:text-emerald-700 transition-colors duration-200">Dashboard</span>
+                  </Link>
+                  <button
+                    onClick={() => { logout(); navigate('/'); }}
+                    className="flex items-center space-x-2 text-gray-500 hover:text-red-600 transition-colors duration-200"
+                    title="Logout"
+                  >
+                    <LogOut className="w-6 h-6" />
+                    <span className="hidden md:inline">Logout</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-200">
+                    Masuk
+                  </Link>
+                  <Link to="/register" className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 hover:shadow-lg">
+                    Daftar
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

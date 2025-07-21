@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Home } from 'lucide-react';
 
 interface Campaign {
   id: string;
@@ -40,6 +41,7 @@ const CampaignList: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCampaigns();
@@ -78,7 +80,17 @@ const CampaignList: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold mb-8 text-center">Daftar Kampanye</h1>
+      {/* Header with Home button */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-3xl font-bold">Daftar Kampanye</h1>
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg font-medium border border-emerald-200 transition-colors"
+        >
+          <Home className="w-5 h-5" />
+          Beranda
+        </button>
+      </div>
       <div className="flex flex-col md:flex-row gap-4 mb-8 justify-between items-center">
         <input
           type="text"

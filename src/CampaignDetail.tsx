@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Home } from 'lucide-react';
 
 interface Campaign {
   id: string;
@@ -32,6 +33,7 @@ const CampaignDetail: React.FC = () => {
   const { id } = useParams();
   const [campaign, setCampaign] = useState<Campaign | null>(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCampaign();
@@ -71,6 +73,17 @@ const CampaignDetail: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-12">
+      {/* Header with Home button */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-3xl font-bold">Detail Kampanye</h1>
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg font-medium border border-emerald-200 transition-colors"
+        >
+          <Home className="w-5 h-5" />
+          Beranda
+        </button>
+      </div>
       <img src={getImageUrl()} alt={campaign.title} className="w-full h-64 object-cover rounded-xl mb-8" />
       <h1 className="text-3xl font-bold mb-2">{campaign.title}</h1>
       <p className="text-gray-600 mb-6">{campaign.description}</p>

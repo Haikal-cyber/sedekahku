@@ -26,6 +26,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem('authToken'));
   const [user, setUser] = useState<any | null>(null);
 
+  // Decode user from token on mount or when token changes
+  useEffect(() => {
+    if (token && !user) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setUser(payload);
+      } catch (e) {
+        setUser(null);
+      }
+    }
+  }, [token]);
+
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       const response = await fetch('https://sedekahku.99delivery.id/auth/login', {

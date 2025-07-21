@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import { Home } from 'lucide-react';
 
 const paymentMethods = [
   { label: 'Bank Transfer', value: 'bank_transfer' },
@@ -100,7 +101,17 @@ const DonationForm: React.FC = () => {
 
   return (
     <div className="max-w-lg mx-auto px-4 py-12">
-      <h1 className="text-2xl font-bold mb-6 text-center">Formulir Donasi</h1>
+      {/* Header with Home button */}
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl font-bold">Formulir Donasi</h1>
+        <button
+          onClick={() => navigate('/')}
+          className="flex items-center gap-2 px-4 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-lg font-medium border border-emerald-200 transition-colors"
+        >
+          <Home className="w-5 h-5" />
+          Beranda
+        </button>
+      </div>
       
       {error && (
         <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
@@ -121,19 +132,6 @@ const DonationForm: React.FC = () => {
             placeholder="Masukkan nominal donasi"
             disabled={isLoading}
           />
-        </div>
-        <div>
-          <label className="block mb-1 font-medium">Metode Pembayaran</label>
-          <select
-            value={payment}
-            onChange={e => setPayment(e.target.value)}
-            className="w-full border border-gray-300 rounded-lg px-4 py-2"
-            disabled={isLoading}
-          >
-            {paymentMethods.map(method => (
-              <option key={method.value} value={method.value}>{method.label}</option>
-            ))}
-          </select>
         </div>
         <div>
           <label className="block mb-1 font-medium">Nama Donatur</label>

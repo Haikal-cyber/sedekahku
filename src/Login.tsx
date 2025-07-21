@@ -30,10 +30,6 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleGoogleLogin = () => {
-    alert('Login dengan Google (simulasi)');
-  };
-
   return (
     <div className="max-w-md mx-auto px-4 py-12">
       <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
@@ -86,14 +82,6 @@ const Login: React.FC = () => {
           ) : (
             'Login'
           )}
-        </button>
-        <button
-          type="button"
-          onClick={handleGoogleLogin}
-          className="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg"
-          disabled={isLoading}
-        >
-          Login dengan Google
         </button>
         <div className="text-center text-sm mt-4">
           Belum punya akun?{' '}
